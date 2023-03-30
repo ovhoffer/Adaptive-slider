@@ -14,8 +14,7 @@
 }
 .slider__container {
    position: relative;
-   width: 500px;
-   height: 300px;
+
    border: 1px solid black;
 }
 .slider__buttons {
@@ -47,8 +46,23 @@
    align-items: center;
    flex-direction: column;
    justify-content: center;
-   width: 500px;
-   height: 300px;
+  
+}
+
+@media only screen and (min-width: 589px) {
+   .slider__container {
+      width: 500px;
+      height: 300px;
+
+   }
+   
+   
+   .slider__item {
+
+      width: 500px;
+      height: 300px;
+   }
+
 }
 
 @media only screen and (max-width: 590px) {
@@ -68,5 +82,18 @@
       width: 300px;
       height: 300px;
    }
+
+}
+
+@media only screen and (max-width: 690px) {
+   .slider__container {
+      width: 400px;
+   }
+
+   .slider__item {
+      background-color: #ff008c;
+      width: 400px;
+   }
+
 
 }
