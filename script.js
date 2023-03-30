@@ -25,13 +25,19 @@ class Slider {
    }
 
    newPosition() {
+     
       if (this.position > 0 || this.position < -2 * sliderWidth) {
          this.position = 0;
       }
       sliderList.style.marginLeft = this.position + 'px'
    }
+
 }
 
 const slider = new Slider(sliderWidth);
 buttonNext.onclick = () => slider.next();
 buttonPrev.onclick = () => slider.previous();
+
+window.addEventListener('resize', (e) => {
+   sliderList.style.marginLeft = 0;
+ });
