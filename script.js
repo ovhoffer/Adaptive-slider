@@ -50,33 +50,3 @@ function setSize() {
    sliderWidth = document.querySelector('.slider__container').clientWidth; 
    slider = new Slider(width);
 }
-
-
-
-
-let touchstartX = 0;
-let touchstartY = 0;
-let touchendX = 0;
-let touchendY = 0;
-
-
-sliderContent.addEventListener('touchstart', function(event) {
-    touchstartX = event.changedTouches[0].screenX;
-    touchstartY = event.changedTouches[0].screenY;
-}, false);
-
-sliderContent.addEventListener('touchend', function(event) {
-    touchendX = event.changedTouches[0].screenX;
-    touchendY = event.changedTouches[0].screenY;
-    handleGesture();
-}, false); 
-
-function handleGesture() {
-   if (touchendX < touchstartX) {
-      slider.previous();
-    }
-    
-    if (touchendX > touchstartX) {
-      slider.next();
-    }
-}
