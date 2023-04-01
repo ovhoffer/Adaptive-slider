@@ -70,11 +70,11 @@ sliderContent.addEventListener('touchend', function(event) {
 
 function handleGesture() {
     if (touchendX < touchstartX) {
-        console.log('Swiped left');
+       slider.previous();
     }
     
     if (touchendX > touchstartX) {
-        console.log('Swiped right');
+       slider.next();
     }
   
 }
