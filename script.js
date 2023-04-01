@@ -73,10 +73,10 @@ sliderContent.addEventListener('touchend', function(event) {
 
 function handleGesture() {
     if (touchendX < touchstartX) {
-       slider.previous();
+       slider.next();
     }
     
     if (touchendX > touchstartX) {
-       slider.next();
+       slider.previous();
     }
 }
