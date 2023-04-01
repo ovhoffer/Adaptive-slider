@@ -69,12 +69,13 @@ sliderContent.addEventListener('touchend', function(event) {
 }, false); 
 
 function handleGesture() {
-    if (touchendX < touchstartX) {
-       slider.previous();
+   if (touchendX < touchstartX) {
+      slider.next();
+      
     }
     
-    if (touchendX > touchstartX) {
-       slider.next();
+    else if (touchendX > touchstartX) {
+      slider.previous();
     }
   
 }
