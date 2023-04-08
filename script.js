@@ -6,6 +6,70 @@ let sliderWidth = document.querySelector('.slider__container').clientWidth;
 const sliderContent = document.querySelector('.slider__container');
 
 
+const sliderIndicators = Array.from(document.querySelectorAll('.indicator__item')); 
+const sliderItems = Array.from(document.querySelectorAll('.slider__item'));
+
+// console.log(sliderItems[0].getBoundingClientRect().left);
+
+//  console.log(sliderItems[2].getBoundingClientRect().left + 'third');
+// console.log(sliderItems[0].getBoundingClientRect().left + 'first');
+//  console.log(sliderItems[1].getBoundingClientRect().left + 'sec');
+// document.addEventListener('DOMContentLoaded', setIndicator)
+//console.log(activeIndivator);
+//sliderIndicators[0].classList.add('indicator__active')
+function setIndicator(index) {
+   for (let a = 0; a < sliderIndicators.length; a++) {
+      sliderIndicators[a].classList.remove('indicator__active')
+   }
+   for (let i = 0; i < sliderIndicators.length; i++) {
+      if (i === index) {
+         sliderIndicators[i].classList.add('indicator__active')
+      }
+   }
+}
+
+let n = 0;
+let m = 0;
+
+
+function getEvents() {
+   for (let i = 0; i < sliderIndicators.length; i++) {
+      sliderIndicators[i].addEventListener('click', () => {
+         slider.position = -i * width;
+         slider.newPosition(i);
+         console.log(i)
+         n = i;
+      })
+   }
+}
+
+getEvents();
+
+
+function setPrevNum() {
+   if (n <= 0 || n > sliderItems.length - 1) {
+      n = 0;
+   }
+   else {
+      n--;
+      console.log(n)
+   }
+   return n
+}
+
+function setNextNum() {
+   if (n < 0 || n >= sliderItems.length - 1) {
+      n = 0;
+   }
+   else {
+      n++;
+      console.log(n)
+   }
+ return n
+}
+
+
+
 class Slider {
    constructor(stepWidth = 0) {
       this.position = 0;
@@ -16,21 +80,24 @@ class Slider {
    previous() {
       this.position += this.stepWidth;
       this.step--;
-      this.newPosition();
+      this.newPosition(setPrevNum());
    }
 
    next() {
       this.position -= this.stepWidth;
       this.step++;
-      this.newPosition();
+      this.newPosition(setNextNum());
    }
 
-   newPosition() {
+   newPosition(n) {
+      let index = n;
       if (this.position > 0 || this.position < -2 * width) {
          this.position = 0;
       }
-      sliderList.style.marginLeft = this.position + 'px'
+      sliderList.style.marginLeft = this.position + 'px';
+      setIndicator(index)
    }
+
 
 }
 
@@ -41,6 +108,7 @@ window.addEventListener('resize', (e) => {
 
 buttonNext.onclick = () => slider.next();
 buttonPrev.onclick = () => slider.previous();
+
 
 let slider = new Slider(width);
 
@@ -77,5 +145,7 @@ function handleGesture() {
     else if (touchendX > touchstartX) {
       slider.previous();
     }
-  
 }
+
+
+

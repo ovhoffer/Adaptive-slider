@@ -14,7 +14,7 @@
 }
 .slider__container {
    position: relative;
-
+   position: relative;
    border: 1px solid black;
 }
 .slider__buttons {
@@ -47,6 +47,27 @@
    flex-direction: column;
    justify-content: center;
   
+}
+
+.slider__indicators {
+   display: flex;
+   left: 45%;
+   flex-direction: row;
+   position: absolute;
+}
+
+.indicator__active {
+   width: 8px;
+   height: 8px;
+   background-color: #1a0674;
+   padding: 1px;
+}
+.indicator__item {
+   margin: 10px 5px;
+   border-radius: 50px;
+   width: 6px;
+   height: 6px;
+   background-color: #3f1ae0;
 }
 
 @media only screen and (min-width: 589px) {
