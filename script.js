@@ -9,14 +9,7 @@ const sliderContent = document.querySelector('.slider__container');
 const sliderIndicators = Array.from(document.querySelectorAll('.indicator__item')); 
 const sliderItems = Array.from(document.querySelectorAll('.slider__item'));
 
-// console.log(sliderItems[0].getBoundingClientRect().left);
 
-//  console.log(sliderItems[2].getBoundingClientRect().left + 'third');
-// console.log(sliderItems[0].getBoundingClientRect().left + 'first');
-//  console.log(sliderItems[1].getBoundingClientRect().left + 'sec');
-// document.addEventListener('DOMContentLoaded', setIndicator)
-//console.log(activeIndivator);
-//sliderIndicators[0].classList.add('indicator__active')
 function setIndicator(index) {
    for (let a = 0; a < sliderIndicators.length; a++) {
       sliderIndicators[a].classList.remove('indicator__active')
@@ -86,12 +79,13 @@ class Slider {
    next() {
       this.position -= this.stepWidth;
       this.step++;
+      console.log(this.position)
       this.newPosition(setNextNum());
    }
 
    newPosition(n) {
       let index = n;
-      if (this.position > 0 || this.position < -2 * width) {
+      if (this.position > 0 || this.position < -(sliderItems.length - 1) * width) {
          this.position = 0;
       }
       sliderList.style.marginLeft = this.position + 'px';
