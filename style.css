@@ -43,7 +43,7 @@ button {
 }
 
 button:hover {
-   opacity: 0.5;
+   background-color: #9d8ec7bb;
 }
 
 .slider__track {

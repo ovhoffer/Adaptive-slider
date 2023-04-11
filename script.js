@@ -4,10 +4,9 @@ const buttonNext = document.querySelector('.buttons__right');
 let width = document.querySelector('.slider__item').clientWidth;
 let sliderWidth = document.querySelector('.slider__container').clientWidth;
 const sliderContent = document.querySelector('.slider__container');
-
-
 const sliderIndicators = Array.from(document.querySelectorAll('.indicator__item')); 
 const sliderItems = Array.from(document.querySelectorAll('.slider__item'));
+
 
 
 function setIndicator(index) {
@@ -30,13 +29,13 @@ function getEvents() {
       sliderIndicators[i].addEventListener('click', () => {
          slider.position = -i * width;
          slider.newPosition(i);
-         console.log(i)
          n = i;
       })
    }
 }
 
-getEvents();
+
+
 
 
 function setPrevNum() {
@@ -45,7 +44,6 @@ function setPrevNum() {
    }
    else {
       n--;
-      console.log(n)
    }
    return n
 }
@@ -56,7 +54,6 @@ function setNextNum() {
    }
    else {
       n++;
-      console.log(n)
    }
  return n
 }
@@ -79,39 +76,36 @@ class Slider {
    next() {
       this.position -= this.stepWidth;
       this.step++;
-      console.log(this.position)
       this.newPosition(setNextNum());
    }
 
    newPosition(n) {
       let index = n;
-      if (this.position > 0 || this.position < -(sliderItems.length - 1) * width) {
+      if (this.position > 0 || this.position < -(sliderItems.length - 1) * this.stepWidth) {
          this.position = 0;
       }
       sliderList.style.marginLeft = this.position + 'px';
       setIndicator(index)
    }
-
-
 }
-
-window.addEventListener('resize', (e) => {
-   setSize();
- })
-
 
 buttonNext.onclick = () => slider.next();
 buttonPrev.onclick = () => slider.previous();
+window.addEventListener('resize', setSize)
+document.addEventListener('DOMContentLoaded', getEvents)
 
 
 let slider = new Slider(width);
 
 function setSize() {
-   sliderList.style.marginLeft = 0 + 'px'
-   width = document.querySelector('.slider__item').clientWidth;
-   sliderWidth = document.querySelector('.slider__container').clientWidth; 
-   slider = new Slider(width);
+   sliderList.style.marginLeft = 0;
+   setIndicator(0)
+   newWidth = document.querySelector('.slider__item').clientWidth;
+   n = 0
+   slider = new Slider(newWidth); 
 }
+
+
 
 let touchstartX = 0;
 let touchstartY = 0;
