@@ -1,13 +1,5 @@
-const sliderList = document.querySelector('.slider__list');
-const buttonPrev = document.querySelector('.buttons__left');
-const buttonNext = document.querySelector('.buttons__right');
+
 let width = document.querySelector('.slider__item').clientWidth;
-let sliderWidth = document.querySelector('.slider__container').clientWidth;
-const sliderContent = document.querySelector('.slider__container');
-const sliderIndicators = Array.from(document.querySelectorAll('.indicator__item')); 
-const sliderItems = Array.from(document.querySelectorAll('.slider__item'));
-
-
 
 
 
@@ -21,24 +13,44 @@ class Slider {
       this.touchstartY = 0;
       this.touchendX = 0;
       this.touchendY = 0;
+
+      // slider configs :3
+
+      this.indicators = true;
+      this.indicatorShape = {
+         basic: "../indicators/basic.png",
+         active: "../indicators/active.png"
+      }
+      this.sliderList = document.querySelector('.slider__list');
+      this.sliderSpeed = '0.25'
+      this.buttonPrev = document.querySelector('.buttons__left');
+      this.buttonNext = document.querySelector('.buttons__right');
+      this.sliderContent = document.querySelector('.slider__container');
+      this.sliderIndicators = Array.from(document.querySelectorAll('.indicator__item'));
+      this.sliderItems = Array.from(document.querySelectorAll('.slider__item'));
+     // this.width = document.querySelector('.slider__item').clientWidth;
    }
 
    init() {
-      buttonNext.onclick = () => this.next();
-      buttonPrev.onclick = () => this.previous();
-      window.addEventListener('resize', setSize)
+      this.buttonNext.onclick = () => this.next();
+      this.buttonPrev.onclick = () => this.previous();
       document.addEventListener('DOMContentLoaded', getEvents);
-      // select main track of slider
-      this.sliderList = document.querySelector('.slider__list');
-      // select controllers
-      this.buttonPrev = document.querySelector('.buttons__left');
-      this.buttonNext = document.querySelector('.buttons__right');
-      // select width of slider
-      this.width = document.querySelector('.slider__item').clientWidth;
-      this.sliderWidth = document.querySelector('.slider__container').clientWidth;
-      this.sliderContent = document.querySelector('.slider__container');
-      this.sliderIndicators = Array.from(document.querySelectorAll('.indicator__item')); 
-      this.sliderItems = Array.from(document.querySelectorAll('.slider__item'));
+      window.addEventListener('resize', () => {
+        // this.stepWidth = document.querySelector('.slider__item').clientWidth;
+       
+         this.sliderList.style.marginLeft = 0;
+         this.n = 0;
+         this.position = 0;
+         this.step = 0;
+         this.stepWidth = document.querySelector('.slider__item').clientWidth;
+         this.setIndicator(0)
+      });
+      if (this.indicators != true) {
+         for (let i = 0; i < this.sliderIndicators.length; i++) {
+            this.sliderIndicators[i].style.display = 'none';
+         }
+      }
+      this.sliderList.style.transition = `all ${this.sliderSpeed}s ease`;
    }
    
    previous() {
@@ -49,17 +61,18 @@ class Slider {
 
    next() {
       this.position -= this.stepWidth;
+      console.log('bib')
       this.step++;
       this.newPosition(this.setNextNum());
    }
 
    setIndicator(index) {
       for (let a = 0; a < this.sliderIndicators.length; a++) {
-         this.sliderIndicators[a].classList.remove('indicator__active')
+         this.sliderIndicators[a].src = this.indicatorShape.basic;
       }
       for (let i = 0; i < this.sliderIndicators.length; i++) {
          if (i === index) {
-            this.sliderIndicators[i].classList.add('indicator__active')
+            this.sliderIndicators[i].src = this.indicatorShape.active;
          }
       }
    }
@@ -83,6 +96,7 @@ class Slider {
       else {
          this.n++;
       }
+      console.log(this.n)
       return this.n
       }
 
@@ -118,7 +132,7 @@ class Slider {
 function getEvents() {
    for (let i = 0; i < slider.sliderIndicators.length; i++) {
       slider.sliderIndicators[i].addEventListener('click', () => {
-         slider.position = -i * slider.width;
+         slider.position = -i * width;
          slider.newPosition(i);
          slider.n = i;
      
@@ -132,11 +146,12 @@ slider.init()
 
 
 function setSize() {
-   slider.sliderList.style.marginLeft = 0;
-   slider.setIndicator(0)
-   slider.newWidth = document.querySelector('.slider__item').clientWidth;
-   slider.n = 0
-   slider = new Slider(newWidth); 
+   this.stepWidth = document.querySelector('.slider__item').clientWidth;
+   this.setIndicator(0)
+   this.sliderList.style.marginLeft = 0;
+   this.n = 0;
+
+ //slider = new Slider(stepWidth); 
 }
 
 slider.sliderContent.addEventListener('touchstart', function(event) {

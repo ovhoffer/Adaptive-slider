@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  list-style: none;
+}
+
+.wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #382824;
+  text-align: center;
+}
+
+.wrapper h1 {
+  margin-bottom: 40px;
+}
+
+.slider__container {
+  position: relative;
+  position: relative;
+  border: 2px solid black;
+}
+
+.slider__buttons {
+  top: 45%;
+  position: absolute;
+  display: flex;
+  min-width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+button {
+  font-weight: 800;
+  background-color: #9d8ec7;
+  border: 2px solid black;
+  padding: 3px 10px;
+  border-radius: 2px;
+  transition: all ease 0.25s;
+}
+
+button:hover {
+  background-color: rgba(157, 142, 199, 0.7333333333);
+}
+
+.slider__track {
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.slider__list {
+  top: 0;
+  left: 0;
+  position: absolute;
+  display: flex;
+  transition: all 0.25s ease;
+}
+
+.slider__item img {
+  width: 500px;
+  height: 300px;
+}
+
+.slider__item {
+  background-color: #ff008c;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slider__indicators {
+  display: flex;
+  left: 45%;
+  flex-direction: row;
+  position: absolute;
+}
+
+.indicator__active {
+  width: 8px;
+  height: 8px;
+  background-color: #1a0674;
+  padding: 1px;
+}
+
+.indicator__item {
+  margin: 10px 5px;
+  width: 8px;
+}
+
+@media only screen and (min-width: 589px) {
+  .slider__container {
+    width: 500px;
+    height: 300px;
+  }
+  .slider__item {
+    width: 500px;
+    height: 300px;
+  }
+}
+@media only screen and (max-width: 590px) {
+  .slider__container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+  }
+  .slider__item {
+    background-color: rgba(255, 0, 140, 0);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 300px;
+    height: 300px;
+  }
+  .slider__item img {
+    width: 300px;
+    height: 300px;
+  }
+}
+@media only screen and (max-width: 690px) {
+  .slider__container {
+    width: 400px;
+  }
+  .slider__item {
+    background-color: #ff008c;
+    width: 400px;
+  }
+  .slider__item img {
+    width: 400px;
+    height: 300px;
+  }
+}
+/*# sourceMappingURL=main.css.map */
